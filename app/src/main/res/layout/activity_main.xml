@@ -5,60 +5,70 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Simple and easy"
-        android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp" />
-    .
+        android:layout_marginTop="44dp"
+        android:text="Simple and easy"
+        android:textSize="30dp"
+        />
+
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notification builder"
-        android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Notification builder"
+        android:textColor="#11AACC"
         android:textSize="35dp"
-        android:textColor="#11AACC" />
+        />
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
         android:layout_below="@+id/textView2"
-        android:gravity="center_horizontal"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2"
-        android:layout_marginTop="52dp"
         android:layout_alignRight="@+id/textView2"
         android:layout_alignEnd="@+id/textView2"
-        android:hint="Give your notification a cute name" />
+        android:layout_marginTop="52dp"
+        android:gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="textCapSentences"
+        android:hint="Give your notification a cute name"
+        />
 
     <EditText
+        android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:hint="I definitely must do that"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:layout_below="@+id/editText"
-        android:gravity="center_horizontal"
-        android:layout_alignLeft="@+id/editText"
         android:layout_alignStart="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
         android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:ems="15"
+        android:inputType="textCapSentences"
+        android:hint="I definitely must do that"
+        />
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notify me !"
-        android:id="@+id/button"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="77dp"
+        android:layout_centerHorizontal="true"
         android:background="#11AACC"
         android:textColor="@android:color/white"
-        android:layout_marginTop="77dp"
-        android:layout_below="@+id/editText2"
-        android:layout_centerHorizontal="true" />
+        android:text="Notify me !"
+        />
 
 </RelativeLayout>
