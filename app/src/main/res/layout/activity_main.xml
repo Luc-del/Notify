@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -16,10 +18,10 @@
         />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/textViewTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="Notification builder"
@@ -28,14 +30,12 @@
         />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
+        android:layout_below="@+id/textViewSubTitle"
+        android:layout_alignStart="@+id/textViewSubTitle"
+        android:layout_alignEnd="@+id/textViewSubTitle"
         android:layout_marginTop="52dp"
         android:gravity="center_horizontal"
         android:ems="10"
@@ -44,14 +44,12 @@
         />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTextBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_alignRight="@+id/editText"
+        android:layout_below="@+id/editTextTitle"
+        android:layout_alignStart="@+id/editTextTitle"
+        android:layout_alignEnd="@+id/editTextTitle"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:ems="15"
@@ -63,7 +61,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/editTextBody"
         android:layout_marginTop="77dp"
         android:layout_centerHorizontal="true"
         android:background="#11AACC"

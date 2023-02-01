@@ -10,12 +10,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.view.MenuItemCompat;
 
 import java.util.UUID;
 
@@ -23,16 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    EditText ed1, ed2;
-    Button b1;
+    EditText editTextTitle, editTextBody;
+    Button buttonSend;
+    Spinner spinner;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ed1 = findViewById(R.id.editText);
-        ed2 = findViewById(R.id.editText2);
-        b1 = findViewById(R.id.button);
+        editTextTitle = findViewById(R.id.editTextTitle);
+        editTextBody = findViewById(R.id.editTextBody);
+        buttonSend = findViewById(R.id.button);
 
         final String CHANNEL_ID = "channel_id";
 
@@ -56,14 +64,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final NotificationManager notificationManager = globalNotificationManager;
-        b1.setOnClickListener(new View.OnClickListener() {
+        buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Context ctx = getApplicationContext();
 
-                String title = ed1.getText().toString().trim();
-                String body = ed2.getText().toString().trim();
+                String title = editTextTitle.getText().toString().trim();
+                String body = editTextBody.getText().toString().trim();
 
                 int NOTIFICATION_ID = Math.abs(UUID.randomUUID().hashCode());
                 Log.i(TAG, "created notification with ID " + NOTIFICATION_ID);
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         .setContentTitle(title)
                         .setContentText(body)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setAutoCancel(true)
+//                        .setAutoCancel(true)
                         .setContentIntent(clickPendingIntent)
                         .addAction(R.mipmap.ic_launcher, "Done", closePendingIntent);
 
@@ -93,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Handle close button on notification
     public static class ActionReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context ctx, Intent intent) {
@@ -106,5 +115,37 @@ public class MainActivity extends AppCompatActivity {
                 NotificationManager notificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancel(id);
             }
+    }
+
+    // Create the action bar elements
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        spinner = (Spinner) menu.findItem(R.id.spinner).getActionView();
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinnerArray, R.layout.spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Log.i(TAG, "spinner selection: " + pos + " " + id);
+
+                if (pos > 0) {
+                    CharSequence text = "Feature coming soon ! (" + parent.getSelectedItem().toString() + ")";
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Log.i(TAG, "spinner nothing selected");
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }
