@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="spinnerArray">
-        <item>Single</item>
-        <item>Planned</item>
-        <item>Periodic</item>
-    </string-array>
-</resources>

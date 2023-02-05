@@ -10,29 +10,28 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.view.MenuItemCompat;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
 
     EditText editTextTitle, editTextBody;
     Button buttonSend;
-    Spinner spinner;
+    BottomNavigationView bottomMenu;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
         editTextBody = findViewById(R.id.editTextBody);
         buttonSend = findViewById(R.id.button);
 
+        bottomMenu = findViewById(R.id.bottomNavigationView);
+        bottomMenu.setOnNavigationItemSelectedListener(this);
+        bottomMenu.setSelectedItemId(R.id.singleItem);
+
         final String CHANNEL_ID = "channel_id";
 
+        // Create the notification channel.
         NotificationManager globalNotificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             globalNotificationManager.createNotificationChannel(mChannel);
         }
 
+        // handle on click main button action.
         final NotificationManager notificationManager = globalNotificationManager;
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,35 +122,34 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-    // Create the action bar elements
+    // Handle action on bottom menu click.
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.i(TAG, "bottom menu selection: " + item);
+        switch (item.getItemId()) {
+            case R.id.singleItem:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, firstFragment).commit();
+                return true;
 
-        spinner = (Spinner) menu.findItem(R.id.spinner).getActionView();
+            case R.id.plannedItem:
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.spinnerArray, R.layout.spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                CharSequence text = "Feature coming soon ! (" + item + ")";
+                Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                toast.show();
 
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, secondFragment).commit();
+                return false;
 
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                Log.i(TAG, "spinner selection: " + pos + " " + id);
+            case R.id.periodicItem:
 
-                if (pos > 0) {
-                    CharSequence text = "Feature coming soon ! (" + parent.getSelectedItem().toString() + ")";
-                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
+                text = "Feature coming soon ! (" + item + ")";
+                toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                toast.show();
 
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Log.i(TAG, "spinner nothing selected");
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, thirdFragment).commit();
+                return false;
+        }
+        return false;
     }
+
 }
