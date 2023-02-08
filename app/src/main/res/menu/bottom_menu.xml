@@ -3,16 +3,19 @@
     <item
         android:id="@+id/singleItem"
         android:title="Single"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:checked="true"
         />
     <item
         android:id="@+id/plannedItem"
         android:title="Planned"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:enabled="false"
         />
     <item
         android:id="@+id/periodicItem"
         android:title="Periodic"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:enabled="false"
         />
 </menu>

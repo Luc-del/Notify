@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="selected"
+        android:state_selected="true"
+        android:color="@color/light"
+        />
+    <item
+        android:title="unselected"
+        android:state_selected="false"
+        android:color="@color/primary"
+        />
+</selector>
+
+<!-- Advanced version with drawable-->
+<!-- https://stackoverflow.com/questions/68807365/is-is-possible-to-have-rounded-background-of-selected-bottom-navigation-item/69734343#69734343-->
