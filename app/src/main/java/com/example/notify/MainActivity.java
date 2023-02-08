@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     EditText editTextTitle, editTextBody;
     Button buttonSend;
     BottomNavigationView bottomMenu;
+    Button settingsButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,4 +154,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+    // Create the action bar settings button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+
+        settingsButton = (Button) menu.findItem(R.id.settings).getActionView();
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // Handle settings button action
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.settings) {
+            CharSequence text = "Feature coming soon ! (" + item + ")";
+            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
