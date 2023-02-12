@@ -170,10 +170,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         int id = item.getItemId();
 
         if (id == R.id.settings) {
-            CharSequence text = "Feature coming soon ! (" + item + ")";
-            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-            toast.show();
+            Intent switchActivityIntent = new Intent(this, Settings.class);
+            startActivity(switchActivityIntent);
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 }
